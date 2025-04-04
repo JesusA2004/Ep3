@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests\PedidoRequest;
 use App\Http\Resources\PedidoResource;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class PedidoController extends Controller
 {

@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Publicacion;
+use App\Models\Publicacione;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Requests\PublicacionRequest;
-use App\Http\Resources\PublicacionResource;
+use App\Http\Requests\PublicacioneRequest;
+use App\Http\Resources\PublicacioneResource;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
-class PublicacionController extends Controller
+class PublicacioneController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
         $perPage = $request->input('per_page', 20);
-        $publicaciones = Publicacion::paginate($perPage);
+        $publicaciones = Publicacione::paginate($perPage);
 
-        return PublicacionResource::collection($publicaciones)->response();
+        return PublicacioneResource::collection($publicaciones)->response();
     }
 
-    public function store(PublicacionRequest $request): JsonResponse
+    public function store(PublicacioneRequest $request): JsonResponse
     {
         try {
-            $publicacion = Publicacion::create($request->validated());
+            $publicacion = Publicacione::create($request->validated());
             return response()->json(
-                new PublicacionResource($publicacion), 
+                new PublicacioneResource($publicacion), 
                 201
             );
         } catch (\Exception $e) {
@@ -32,24 +33,24 @@ class PublicacionController extends Controller
         }
     }
 
-    public function show(Publicacion $publicacion): JsonResponse
+    public function show(Publicacione $publicacion): JsonResponse
     {
-        return response()->json(new PublicacionResource($publicacion));
+        return response()->json(new PublicacioneResource($publicacion));
     }
 
-    public function update(PublicacionRequest $request, Publicacion $publicacion): JsonResponse
+    public function update(PublicacioneRequest $request, Publicacione $publicacion): JsonResponse
     {
         try {
             $publicacion->update($request->validated());
             return response()->json(
-                new PublicacionResource($publicacion->refresh())
+                new PublicacioneResource($publicacion->refresh())
             );
         } catch (\Exception $e) {
             return $this->handleError($e, 'Error al actualizar la publicación');
         }
     }
 
-    public function destroy(Publicacion $publicacion): JsonResponse
+    public function destroy(Publicacione $publicacion): JsonResponse
     {
         try {
             $publicacion->delete();

@@ -7,8 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventoRequest;
 use App\Http\Resources\EventoResource;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class EventoController extends Controller
 {
