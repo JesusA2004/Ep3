@@ -13,14 +13,15 @@ use App\Http\Controllers\Controller;
 class EventoController extends Controller
 {
     /**
-     * Listado de eventos con paginación
+     * Listado de eventos sin paginación
      */
     public function index(Request $request): JsonResponse
     {
-        $perPage = $request->input('per_page', 20); // Usar mismo valor que $perPage del modelo
-        $eventos = Evento::paginate($perPage);
+        // Se obtienen todos los eventos
+        $eventos = Evento::all();
 
-        return EventoResource::collection($eventos)->response();
+        // Retornar la colección en un formato JSON plano
+        return response()->json(EventoResource::collection($eventos));
     }
 
     /**
@@ -77,7 +78,9 @@ class EventoController extends Controller
     {
         try {
             $evento->delete();
-            return response()->json(null, 204); // 204 No Content
+            return response()->json([
+                'message' => 'Evento eliminado correctamente'
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error al eliminar el evento',

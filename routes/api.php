@@ -19,6 +19,5 @@ Route::middleware(['jwt.auth'])->group(function () {
     });
 
     Route::apiResource('publicaciones', PublicacioneController::class);
-    Route::apiResource('pedidos', PedidoController::class);
     Route::apiResource('eventos', EventoController::class);
 });
