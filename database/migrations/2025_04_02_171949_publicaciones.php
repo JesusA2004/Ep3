@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('publicaciones', function (Blueprint $collection) {
+            $collection->id();
             $collection->string('titulo');
             $collection->string('contenido');
             $collection->object('autor'); // Objeto completo

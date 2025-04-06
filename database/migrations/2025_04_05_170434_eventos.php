@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('eventos', function (Blueprint $collection) {
+            $collection->id();
             $collection->string('nombre');
             $collection->object('ubicacion');
             $collection->array('asistentes');
